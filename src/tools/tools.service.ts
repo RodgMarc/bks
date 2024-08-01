@@ -1,11 +1,22 @@
 import { Injectable } from '@nestjs/common';
 import { CreateToolDto } from './dto/create-tool.dto';
 import { UpdateToolDto } from './dto/update-tool.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Tool } from './entities/tool.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class ToolsService {
+  constructor(
+    @InjectRepository(Tool)
+    private repository: Repository<Tool>
+  ) {}
   create(createToolDto: CreateToolDto) {
-    return 'This action adds a new tool';
+    let ferramenta:Tool = new Tool();
+
+    ferramenta.name = createToolDto.name;
+    console.log(ferramenta)
+    return this.repository.save(ferramenta);
   }
 
   findAll() {

@@ -9,6 +9,7 @@ export class ToolsController {
 
   @Post()
   create(@Body() createToolDto: CreateToolDto) {
+    console.log(createToolDto)
     return this.toolsService.create(createToolDto);
   }
 
