@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Tool } from './entities/tool.entity';
 import { Repository } from 'typeorm';
@@ -43,30 +43,56 @@ export class ToolsService {
     });
 
     // se a ferramenta não existir, retorna um erro
-    if (tool === undefined) {
-      return 'Ferramenta não encontrada';
+    if (tool === null) {
+      throw new HttpException(
+        'Ferramenta não encontrada',
+        HttpStatus.BAD_REQUEST,
+      );
     }
 
+    console.log(tool);
+
     // verifica se o parametro do dto foi passado e atualiza o valor
-    if (dto.name !== undefined) {
+    if (dto.name !== null) {
       tool.name = dto.name;
     }
-    if (dto.category !== undefined) {
+    if (dto.category !== null) {
       tool.category = dto.category;
     }
-    if (dto.serialNumber !== undefined) {
+    if (dto.serialNumber !== null) {
       tool.serialNumber = dto.serialNumber;
     }
-    if (dto.obs !== undefined) {
+    if (dto.obs !== null) {
       tool.obs = dto.obs;
     }
 
     // atualiza a ferramenta no banco de dados
-    return this.repository.update(id, tool);
+    await this.repository.update(id, tool);
+
+    // busca a ferramenta atualizada
+    const updatedTool = await this.repository.findOne({
+      where: { id },
+    });
+
+    // retorna a ferramenta atualizada
+    return updatedTool;
   }
 
-  remove(id: number) {
-    console.log('Deletando ferramenta de id: ' + id);
-    return this.repository.delete(id);
+  async remove(id: number) {
+    // busca a ferramenta no banco de dados
+    const tool = await this.repository.findOne({
+      where: { id },
+    });
+
+    // se a ferramenta não existir, retorna um erro
+    if (tool === null) {
+      throw new HttpException(
+        'Ferramenta não encontrada',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    this.repository.delete(id);
+    return 'Ferramenta de id: ' + id + ' deletada com sucesso';
   }
 }
