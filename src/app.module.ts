@@ -24,7 +24,7 @@ import { User } from './user/entities/user.entity';
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       synchronize: true,
-      dropSchema: true,
+      dropSchema: false,
       autoLoadEntities: true,
     }),
     ToolsModule,

@@ -1,14 +1,14 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { ToolsService } from './tools.service';
-import { CreateToolDto } from './dto/create-tool.dto';
-import { UpdateToolDto } from './dto/update-tool.dto';
+import { Tool } from './entities/tool.entity';
+
 
 @Controller('tools')
 export class ToolsController {
   constructor(private readonly toolsService: ToolsService) {}
 
   @Post()
-  create(@Body() createToolDto: CreateToolDto) {
+  create(@Body() createToolDto: Tool) {
     console.log(createToolDto)
     return this.toolsService.create(createToolDto);
   }
@@ -24,7 +24,7 @@ export class ToolsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateToolDto: UpdateToolDto) {
+  update(@Param('id') id: string, @Body() updateToolDto: Tool) {
     return this.toolsService.update(+id, updateToolDto);
   }
 
