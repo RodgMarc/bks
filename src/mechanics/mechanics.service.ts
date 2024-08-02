@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Mechanic } from './entities/mechanic.entity';
 
-
 @Injectable()
 export class MechanicsService {
   create(createMechanicDto: Mechanic) {

@@ -1,7 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { ToolsService } from './tools.service';
 import { Tool } from './entities/tool.entity';
-
 
 @Controller('tools')
 export class ToolsController {
@@ -9,7 +16,7 @@ export class ToolsController {
 
   @Post()
   create(@Body() createToolDto: Tool) {
-    console.log(createToolDto)
+    console.log(createToolDto);
     return this.toolsService.create(createToolDto);
   }
 

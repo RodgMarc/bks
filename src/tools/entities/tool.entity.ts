@@ -1,23 +1,19 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('tools')
 export class Tool {
-  
-  //Colunas
   @PrimaryGeneratedColumn()
-  id: number;  
+  id: number;
 
-  @Column({name:'nome_da_ferramenta',nullable:true})
+  @Column({ name: 'nome_da_ferramenta', nullable: true })
   name: string;
 
-  @Column({name:'tipo',nullable:true})
+  @Column({ name: 'tipo', nullable: true })
   category: string;
 
-  @Column({name:'numero_de_serie',nullable:true})
+  @Column({ name: 'numero_de_serie', nullable: true })
   serialNumber: string;
 
-  @Column({name:'observacao',nullable:true})
+  @Column({ name: 'observacao', nullable: true })
   obs: string;
-
 }

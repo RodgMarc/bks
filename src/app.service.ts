@@ -7,7 +7,6 @@ export class AppService {
   }
 
   getola(): string {
-    return 'olá'
+    return 'olá';
   }
-  
 }

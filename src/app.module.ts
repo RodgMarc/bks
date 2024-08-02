@@ -34,4 +34,4 @@ import { User } from './user/entities/user.entity';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}

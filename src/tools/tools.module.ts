@@ -5,7 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Tool } from './entities/tool.entity';
 
 @Module({
-  imports:[TypeOrmModule.forFeature([Tool])],
+  imports: [TypeOrmModule.forFeature([Tool])],
   controllers: [ToolsController],
   providers: [ToolsService],
 })
